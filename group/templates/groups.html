@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Groups | {% endblock %}
+{% block user_name %}Welcome {{ user }} !!!{% endblock %}
+{% block content %}
+
+<div class="flex justify-center items-center text-center">
+    <input type="text" name="query" id="searchQuery" placeholder="Search groups">
+    <button style="width:3cm" class="my-5 mx-5 block rounded-xl text-yellow-100 bg-yellow-800 hover:text-yellow-200 text-2xl lg:text-2xl" type="submit" onclick="searchGroups()">Search</button>
+</div>
+
+<div class="bg-yellow-600 shadow rounded-xl text-center item-center" style="width: 6cm;">
+    <a href="/groups/create/" class="block rounded-xl text-yellow-100 bg-yellow-800 hover:text-yellow-200 text-2xl lg:text-2xl">Create Group</a>
+</div>
+
+<div class="p-10 lg:p-20 text-center">
+    <h1 class="text-3xl lg:text-6xl text-yellow-800">Groups</h1>
+</div>
+
+<div class="w-full flex flex-wrap items-center">
+    {% for group in groups %}
+        <div class="w-full lg:w-1/4 px-3 py-3">
+            <div class="p-3 bg-yellow-600 shadow rounded-xl text-center">
+                <a href="{% url 'group' group.slug %}" class="px-5 py-3 block rounded-xl text-yellow-100 bg-yellow-700">{{ group.name }}</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+
+
+<script>
+  var searchInput = document.getElementById('searchQuery');
+
+  searchInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent form submission
+      searchGroups();
+    }
+  });
+
+  function searchGroups() {
+    var query = searchInput.value;
+    var url = '/groups/search/?query=' + encodeURIComponent(query);
+    window.location.href = url;
+  }
+</script>
+{% endblock %}

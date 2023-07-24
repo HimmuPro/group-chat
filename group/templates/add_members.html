@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ group.name }} | {% endblock %}
+{% block user_name %}Welcome {{ user }} !!!{% endblock %}
+
+{% block content %}
+<div class="p-10 lg:20 flex justify-center items-center text-center">
+  <form method="post" action="{% url 'add-members' group.slug %}">
+    {% csrf_token %}
+    <select name="member_username" id="member_username">
+      <option value="" selected disabled>Select a member</option>
+      {% for user in all_users %}
+        {% if user not in group.members.all %}
+          <option value="{{ user.username }}">{{ user.username }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+    <div class="p-10 rounded-xl text-center">
+      <button style="width:5cm" class="block rounded-xl text-yellow-100 bg-yellow-800 hover:text-yellow-200 text-2xl lg:text-2xl" type="submit">Add Member</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ group.name }} | {% endblock %}
+{% block user_name %}Welcome {{ user }} !!!{% endblock %}
+
+{% block content %}
+<div class="p-10 lg:20 text-center">
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="p-5 lg:10 text-3xl lg:text-3xl text-yellow-800" type="submit">Create Group</button>
+  </form>
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+      <li class="p-5 lg:10 text-3xl lg:text-3xl text-orange-700">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</div>
+
+{% endblock %}
