@@ -63,7 +63,7 @@ To run the application, follow these steps:
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/HimmuPro/chatting.git
+   git clone https://github.com/HimmuPro/group-chat.git
    ```
 
 2. Navigate to the project directory:
